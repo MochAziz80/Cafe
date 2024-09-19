@@ -1,7 +1,6 @@
 const express = require('express');
-const mysql = require('mysql2');
 const cors = require('cors');
-const path = require('path'); // Jika perlu akses ke file statis
+const path = require('path'); 
 
 const app = express();
 const PORT = 8000;
@@ -14,11 +13,13 @@ app.use(express.json());
 const menu = require('./routes/menu.route');
 const auth = require('./routes/auth.route');
 const user = require('./routes/user.route');
+const meja = require('./routes/meja.route')
 
 // Set routes
 app.use('/auth', auth);
 app.use('/user', user);
 app.use('/menu', menu);
+app.use('/meja', meja)
 
 // Static file serving (optional)
 app.use(express.static(path.join(__dirname, 'public')));
