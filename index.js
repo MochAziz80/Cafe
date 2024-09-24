@@ -13,13 +13,15 @@ app.use(express.json());
 const menu = require('./routes/menu.route');
 const auth = require('./routes/auth.route');
 const user = require('./routes/user.route');
-const meja = require('./routes/meja.route')
+const meja = require('./routes/meja.route');
+const transaksi = require('./routes/transaksi.route');
 
 // Set routes
 app.use('/auth', auth);
 app.use('/user', user);
 app.use('/menu', menu);
-app.use('/meja', meja)
+app.use('/meja', meja);
+app.use('/transaksi', transaksi);
 
 // Static file serving (optional)
 app.use(express.static(path.join(__dirname, 'public')));

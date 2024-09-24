@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      jumlah: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       harga: {
         type: DataTypes.INTEGER,
         allowNull: false,
