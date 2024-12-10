@@ -1,43 +1,30 @@
-const express = require('express'); // Tambahkan ini
-const mysql = require('mysql2');
-const cors = require('cors'); // Tambahkan ini juga jika belum diimpor
+const express = require('express');
+const cors = require('cors');
+const path = require('path'); 
 
 const app = express();
-
 const PORT = 8000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Import routes
+const menu = require('./routes/menu.route');
 const auth = require('./routes/auth.route');
 const user = require('./routes/user.route');
-const menu = require('./routes/menu.route');
+const meja = require('./routes/meja.route')
 
+// Set routes
 app.use('/auth', auth);
 app.use('/user', user);
 app.use('/menu', menu);
+app.use('/meja', meja)
 
-// Membuat koneksi ke database MySQL
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', // Ganti dengan username MySQL kamu
-  password: '', // Ganti dengan password MySQL kamu
-  database: 'cafeukk', // Nama database yang digunakan
-});
+// Static file serving (optional)
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Mengecek koneksi
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database: ' + err.stack);
-    return;
-  }
-  console.log('Connected to the database as id ' + connection.threadId);
-});
-
-// connection.end();
-
-app.use(express.static(__dirname));
-
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server runs on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
